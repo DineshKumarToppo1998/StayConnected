@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Notification custom view — dark mode -->
+    <color name="notif_text_primary">#FFE2E2E9</color>
+    <color name="notif_text_secondary">#FFC5C6D0</color>
+    <color name="notif_action_circle">#FF3A3A3A</color>
+    <color name="notif_icon_teal">#FF4ECBA0</color>
+    <color name="notif_icon_grey">#FF9AA0A6</color>
+    <color name="notif_btn_call_bg">#FF1D9E75</color>
+    <color name="notif_btn_call_text">#FFFFFFFF</color>
+    <color name="notif_btn_snooze_bg">#FF3A3A3A</color>
+    <color name="notif_btn_snooze_text">#FFC5C6D0</color>
+</resources>

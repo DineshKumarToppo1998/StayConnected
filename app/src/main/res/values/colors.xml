@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Notification custom view — light mode -->
+    <color name="notif_text_primary">#FF1A1C1E</color>
+    <color name="notif_text_secondary">#FF44474E</color>
+    <color name="notif_action_circle">#FFE8EAED</color>
+    <color name="notif_icon_teal">#FF1D9E75</color>
+    <color name="notif_icon_grey">#FF5F6368</color>
+    <color name="notif_btn_call_bg">#FF1D9E75</color>
+    <color name="notif_btn_call_text">#FFFFFFFF</color>
+    <color name="notif_btn_snooze_bg">#FFE8EAED</color>
+    <color name="notif_btn_snooze_text">#FF44474E</color>
+</resources>

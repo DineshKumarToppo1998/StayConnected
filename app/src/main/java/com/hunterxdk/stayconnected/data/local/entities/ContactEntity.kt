@@ -14,5 +14,6 @@ data class ContactEntity(
     val primaryGroup: ContactGroup,
     val tags: List<String>,
     val notes: String?,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    val isVip: Boolean = false
 )

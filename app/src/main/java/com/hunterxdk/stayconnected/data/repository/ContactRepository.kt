@@ -26,6 +26,8 @@ class ContactRepository @Inject constructor(
 
     suspend fun getContactByPhone(phone: String): ContactEntity? = contactDao.getContactByPhone(phone)
 
+    fun getVipContacts(): Flow<List<ContactEntity>> = contactDao.getVipContacts()
+
     suspend fun insertContact(contact: ContactEntity): Long = contactDao.insertContact(contact)
 
     suspend fun updateContact(contact: ContactEntity) = contactDao.updateContact(contact)

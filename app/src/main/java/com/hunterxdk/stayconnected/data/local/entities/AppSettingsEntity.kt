@@ -12,5 +12,6 @@ data class AppSettingsEntity(
     val respectSystemDnd: Boolean = true,
     val defaultSnoozeMinutes: Int = 120,
     val defaultGroup: String = "FAMILY",
-    val autoDetectCalls: Boolean = true
+    val autoDetectCalls: Boolean = true,
+    val appTheme: String = "DARK"
 )

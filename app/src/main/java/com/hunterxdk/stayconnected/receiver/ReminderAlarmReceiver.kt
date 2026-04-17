@@ -62,7 +62,8 @@ class ReminderAlarmReceiver : BroadcastReceiver() {
                     contactName       = contact.name,
                     contactPhone      = contact.phone,
                     daysSinceLastCall = daysSince,
-                    photoUri          = contact.photoUri
+                    photoUri          = contact.photoUri,
+                    isVip             = contact.isVip
                 )
 
                 contactRepository.updateReminder(

@@ -21,7 +21,7 @@ import com.hunterxdk.stayconnected.data.local.entities.ReminderEntity
         CallLogEntity::class,
         AppSettingsEntity::class
     ],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -55,6 +55,22 @@ abstract class AppDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "ALTER TABLE `app_settings` ADD COLUMN `quietHoursEnabled` INTEGER NOT NULL DEFAULT 1"
+                )
+            }
+        }
+
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE `app_settings` ADD COLUMN `appTheme` TEXT NOT NULL DEFAULT 'DARK'"
+                )
+            }
+        }
+
+        val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE `contacts` ADD COLUMN `isVip` INTEGER NOT NULL DEFAULT 0"
                 )
             }
         }

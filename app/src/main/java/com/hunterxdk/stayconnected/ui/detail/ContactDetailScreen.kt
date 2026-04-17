@@ -228,6 +228,14 @@ fun ContactDetailScreen(
                                     color = colorScheme.secondaryContainer,
                                     textColor = colorScheme.onSecondaryContainer
                                 )
+                                if (contact.isVip) {
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Badge(
+                                        text = "\u2B50 VIP",
+                                        color = Color(0xFFFFC107),
+                                        textColor = Color(0xFF5D4037)
+                                    )
+                                }
                                 contact.tags.take(3).forEach { tag ->
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Badge(

@@ -17,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,7 +44,7 @@ fun DashboardScreen(
     val listState = rememberLazyListState()
     val isScrolling by remember { derivedStateOf { listState.isScrollInProgress } }
 
-    val filters = listOf("ALL", "FAMILY", "FRIENDS", "WORK", "OVERDUE")
+    val filters = listOf("ALL", "FAMILY", "FRIENDS", "WORK", "OVERDUE", "VIP")
 
     Scaffold(
         topBar = {
@@ -123,7 +125,16 @@ fun DashboardScreen(
             item {
                 Spacer(modifier = Modifier.height(8.dp))
                 StreakBanner(streak = uiState.streak)
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Never lose touch with people you care about",
+                    fontSize = 13.sp,
+                    fontStyle = FontStyle.Italic,
+                    color = colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
             // Stat Cards
@@ -245,6 +256,7 @@ fun DashboardScreen(
                     lastCalled = lastCalledText,
                     nextReminder = nextReminderText,
                     isOverdue = isOverdue,
+                    isVip = contact.isVip,
                     photoUri = contact.photoUri,
                     onClick = { onContactClick(contact.id) },
                     onCallClick = {

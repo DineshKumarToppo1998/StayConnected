@@ -38,6 +38,8 @@ class SettingsViewModel @Inject constructor(
 
     fun updateAutoDetectCalls(value: Boolean) = update { it.copy(autoDetectCalls = value) }
 
+    fun updateAppTheme(value: String) = update { it.copy(appTheme = value) }
+
     private fun update(transform: (AppSettingsEntity) -> AppSettingsEntity) {
         viewModelScope.launch {
             settingsRepository.updateSettings(transform(settings.value))

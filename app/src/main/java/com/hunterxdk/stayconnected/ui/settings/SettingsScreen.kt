@@ -122,6 +122,49 @@ fun SettingsScreen(
         ) {
             Spacer(modifier = Modifier.height(8.dp))
 
+            // ── APPEARANCE ────────────────────────────────────────────────
+            SettingsSectionHeader(title = "APPEARANCE")
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceContainerLow)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = if (settings.appTheme == "DARK")
+                                Icons.Default.DarkMode else Icons.Default.LightMode,
+                            contentDescription = null,
+                            tint = colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("Dark Theme", fontWeight = FontWeight.Bold)
+                            Text(
+                                if (settings.appTheme == "DARK") "Dark mode is on" else "Light mode is on",
+                                fontSize = 12.sp,
+                                color = colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                            )
+                        }
+                        Switch(
+                            checked = settings.appTheme == "DARK",
+                            onCheckedChange = { isDark ->
+                                viewModel.updateAppTheme(if (isDark) "DARK" else "LIGHT")
+                            },
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = colorScheme.onPrimary,
+                                checkedTrackColor = colorScheme.primary
+                            )
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             // ── NOTIFICATIONS ─────────────────────────────────────────────
             SettingsSectionHeader(title = "NOTIFICATIONS")
             Card(
@@ -289,24 +332,13 @@ fun SettingsScreen(
                         onClick = { /* Phase 10: open browser */ }
                     )
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
 
-                    // Rate App
-                    SettingsIconRow(
-                        icon = Icons.Default.Star,
-                        label = "Rate StayConnected",
-                        trailingIcon = Icons.AutoMirrored.Filled.OpenInNew,
-                        onClick = { /* Phase 10: open Play Store */ }
-                    )
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    // Contact Support
-                    SettingsIconRow(
-                        icon = Icons.Default.Mail,
-                        label = "Contact Support",
-                        trailingIcon = Icons.AutoMirrored.Filled.OpenInNew,
-                        onClick = { /* Phase 10: open email intent */ }
+                    Text(
+                        text = "Made with ❤️ by Dinesh",
+                        fontSize = 12.sp,
+                        color = colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
                 }
             }

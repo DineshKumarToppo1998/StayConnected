@@ -73,10 +73,10 @@ class DashboardViewModel @Inject constructor(
 
                 val streak = StreakCalculator.calculateStreak(callLogs)
 
-                // Sort by nextReminderAt ascending (overdue/soonest first)
-                val sorted = contacts.sortedBy { contact ->
-                    remindersMap[contact.id]?.nextReminderAt ?: Long.MAX_VALUE
-                }
+                // Sort by nextReminderAt ascending, VIP contacts float to top
+                val sorted = contacts
+                    .sortedBy { contact -> remindersMap[contact.id]?.nextReminderAt ?: Long.MAX_VALUE }
+                    .sortedByDescending { it.isVip }
 
                 val currentFilter = _uiState.value.activeFilter
                 val filtered = applyFilter(sorted, remindersMap, currentFilter)
@@ -118,6 +118,7 @@ class DashboardViewModel @Inject constructor(
         "OVERDUE" -> contacts.filter { contact ->
             reminders[contact.id]?.let { NextReminderCalculator.isOverdue(it.nextReminderAt) } == true
         }
+        "VIP"     -> contacts.filter { it.isVip }
         else      -> contacts // "ALL"
     }
 }

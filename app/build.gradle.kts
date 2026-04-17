@@ -20,8 +20,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../stayconnected.jks")
+            storePassword = "beta1234"
+            keyAlias = "stayconnected"
+            keyPassword = "beta1234"
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -39,6 +49,14 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+
+    applicationVariants.all {
+        outputs.forEach {
+            if (it is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                it.outputFileName = "StayConnected.apk"
+            }
+        }
     }
 }
 

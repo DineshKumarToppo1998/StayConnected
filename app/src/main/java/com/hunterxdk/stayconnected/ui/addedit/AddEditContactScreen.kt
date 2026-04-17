@@ -20,6 +20,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -185,6 +186,54 @@ fun AddEditContactScreen(
                     ) {
                         Text(text = group.name.lowercase().replaceFirstChar { it.uppercase() })
                     }
+                }
+            }
+
+            // ── VIP CONTACT ─────────────────────────────────────────────────
+            Spacer(modifier = Modifier.height(20.dp))
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = if (uiState.isVip) Color(0xFFFFC107).copy(alpha = 0.12f)
+                    else colorScheme.surfaceContainerLow
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        tint = if (uiState.isVip) Color(0xFFFFC107) else colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "VIP Contact",
+                            fontWeight = FontWeight.Bold,
+                            color = if (uiState.isVip) Color(0xFFFFC107) else colorScheme.onSurface
+                        )
+                        Text(
+                            text = "Prioritise reminders and highlight in list",
+                            fontSize = 12.sp,
+                            color = colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                        )
+                    }
+                    Switch(
+                        checked = uiState.isVip,
+                        onCheckedChange = { viewModel.updateIsVip(it) },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color(0xFFFFC107),
+                            checkedTrackColor = Color(0xFFFFC107).copy(alpha = 0.5f)
+                        )
+                    )
                 }
             }
 

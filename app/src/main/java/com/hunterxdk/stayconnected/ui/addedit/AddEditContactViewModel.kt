@@ -38,6 +38,7 @@ data class AddEditUiState(
     val manualDateTime: Long? = null,
     val intervalDays: Int = 7,
     val recurringUnit: RecurringUnit = RecurringUnit.WEEKLY,
+    val isVip: Boolean = false,
     val isSaving: Boolean = false,
     val savedSuccessfully: Boolean = false,
     val errorMessage: String? = null
@@ -75,7 +76,8 @@ class AddEditContactViewModel @Inject constructor(
                     scheduleType  = reminder?.scheduleType ?: ScheduleType.MANUAL,
                     manualDateTime = reminder?.nextReminderAt,
                     intervalDays  = reminder?.intervalDays ?: 7,
-                    recurringUnit = reminder?.recurringUnit ?: RecurringUnit.WEEKLY
+                    recurringUnit = reminder?.recurringUnit ?: RecurringUnit.WEEKLY,
+                    isVip         = contact.isVip
                 )
             }
         }
@@ -138,6 +140,7 @@ class AddEditContactViewModel @Inject constructor(
     fun updatePhone(value: String)    = _uiState.update { it.copy(phone = value) }
     fun updateGroup(value: ContactGroup) = _uiState.update { it.copy(group = value) }
     fun updateNotes(value: String)    = _uiState.update { it.copy(notes = value) }
+    fun updateIsVip(value: Boolean)   = _uiState.update { it.copy(isVip = value) }
     fun updateScheduleType(value: ScheduleType) = _uiState.update { it.copy(scheduleType = value) }
     fun updateManualDateTime(value: Long)       = _uiState.update { it.copy(manualDateTime = value) }
     fun updateIntervalDays(value: Int)          = _uiState.update { it.copy(intervalDays = value) }
@@ -174,7 +177,8 @@ class AddEditContactViewModel @Inject constructor(
                             photoUri     = state.photoUri,
                             primaryGroup = state.group,
                             tags         = state.tags,
-                            notes        = state.notes
+                            notes        = state.notes,
+                            isVip        = state.isVip
                         )
                     )
                     state.contactId
@@ -187,7 +191,8 @@ class AddEditContactViewModel @Inject constructor(
                             photoUri     = state.photoUri,
                             primaryGroup = state.group,
                             tags         = state.tags,
-                            notes        = state.notes
+                            notes        = state.notes,
+                            isVip        = state.isVip
                         )
                     )
                 }

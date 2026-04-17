@@ -45,6 +45,18 @@ class NotificationHelper @Inject constructor(
                 description = "Contact call reminders"
             }
             notificationManager.createNotificationChannel(channel)
+
+            val vipChannel = NotificationChannel(
+                VIP_CHANNEL_ID,
+                "VIP Reminders",
+                NotificationManager.IMPORTANCE_MAX
+            ).apply {
+                description = "High-priority reminders for VIP contacts"
+                enableVibration(true)
+                enableLights(true)
+                lightColor = 0xFFFFC107.toInt()
+            }
+            notificationManager.createNotificationChannel(vipChannel)
         }
     }
 
@@ -62,7 +74,8 @@ class NotificationHelper @Inject constructor(
         contactName: String,
         contactPhone: String = "",
         daysSinceLastCall: Long? = null,
-        photoUri: String? = null
+        photoUri: String? = null,
+        isVip: Boolean = false
     ) {
         val notifId = contactId.toInt()
 
@@ -116,7 +129,7 @@ class NotificationHelper @Inject constructor(
         }
 
         // ── Build notification ────────────────────────────────────────────────
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(context, if (isVip) VIP_CHANNEL_ID else CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setColor(0xFF1D9E75.toInt())
             .setContentTitle("Time to call $contactName")
@@ -242,6 +255,7 @@ class NotificationHelper @Inject constructor(
     companion object {
         private const val TAG = "NotificationHelper"
         const val CHANNEL_ID = "reminders_channel"
+        const val VIP_CHANNEL_ID = "vip_reminders_channel"
         private const val MAX_AVATAR_PX = 256
 
         private const val RC_CALL     = 10_000

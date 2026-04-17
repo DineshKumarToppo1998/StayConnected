@@ -9,11 +9,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.hunterxdk.stayconnected.ui.navigation.NavGraph
 import com.hunterxdk.stayconnected.ui.navigation.Screen
 import com.hunterxdk.stayconnected.ui.permissions.PermissionHandler
+import com.hunterxdk.stayconnected.ui.settings.SettingsViewModel
 import com.hunterxdk.stayconnected.ui.theme.StayConnectedTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +27,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StayConnectedTheme {
+            val settingsViewModel: SettingsViewModel = hiltViewModel()
+            val settings by settingsViewModel.settings.collectAsState()
+            val darkTheme = settings.appTheme == "DARK"
+
+            StayConnectedTheme(darkTheme = darkTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

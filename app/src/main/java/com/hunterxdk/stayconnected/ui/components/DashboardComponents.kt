@@ -1,11 +1,13 @@
 package com.hunterxdk.stayconnected.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.CalendarToday
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.*
@@ -127,6 +129,7 @@ fun ContactItem(
     lastCalled: String,
     nextReminder: String,
     isOverdue: Boolean = false,
+    isVip: Boolean = false,
     photoUri: String? = null,
     onClick: () -> Unit = {},
     onCallClick: () -> Unit
@@ -144,6 +147,7 @@ fun ContactItem(
             .padding(vertical = 6.dp),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = colorScheme.surfaceContainerLow),
+        border = if (isVip) BorderStroke(2.dp, Color(0xFFFFC107)) else null,
         onClick = onClick
     ) {
         Row(
@@ -187,7 +191,7 @@ fun ContactItem(
                         fontWeight = FontWeight.Bold,
                         color = colorScheme.onSurface
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
                     Surface(
                         color = colorScheme.secondaryContainer,
                         shape = RoundedCornerShape(8.dp)
@@ -198,6 +202,15 @@ fun ContactItem(
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             color = colorScheme.onSecondaryContainer
+                        )
+                    }
+                    if (isVip) {
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = "VIP",
+                            tint = Color(0xFFFFC107),
+                            modifier = Modifier.size(14.dp)
                         )
                     }
                 }

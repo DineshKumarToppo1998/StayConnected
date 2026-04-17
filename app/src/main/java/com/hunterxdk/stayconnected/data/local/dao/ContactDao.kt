@@ -21,6 +21,9 @@ interface ContactDao {
     @Query("SELECT * FROM contacts WHERE phone = :phone")
     suspend fun getContactByPhone(phone: String): ContactEntity?
 
+    @Query("SELECT * FROM contacts WHERE isVip = 1 ORDER BY name ASC")
+    fun getVipContacts(): Flow<List<ContactEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertContact(contact: ContactEntity): Long
 

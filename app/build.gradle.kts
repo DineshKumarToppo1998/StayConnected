@@ -22,10 +22,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(System.getenv("KEYSTORE_PATH") ?: "../stayconnected.jks")
-            storePassword = System.getenv("STORE_PASSWORD") ?: "beta1234"
-            keyAlias = System.getenv("KEY_ALIAS") ?: "stayconnected"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "beta1234"
+            storeFile = file("../stayconnected.jks")
+            storePassword = "beta1234"
+            keyAlias = "stayconnected"
+            keyPassword = "beta1234"
         }
     }
 

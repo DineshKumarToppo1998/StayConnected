@@ -1,5 +1,6 @@
 # StayConnected v0.1 (BETA)
 
+"Never Lose touch with people you care about"
 
 Ever had that moment where you suddenly realize you haven’t called someone important in a while… and then comes the “ab yaad aaya?” 😅
 
